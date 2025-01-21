@@ -341,13 +341,13 @@ datasource db {
 model Store {
   id         String      @id @default(auto()) @map("_id") @db.ObjectId
   name       String
-  users      User[]      @relation("StoreToUser")
   billboards Billboard[] @relation("StoreToBillboard")
   categories Category[]  @relation("StoreToCategory")
   sizes      Size[]      @relation("StoreToSize")
   colors     Color[]     @relation("StoreToColor")
   products   Product[]   @relation("StoreToProduct")
   orders     Order[]     @relation("StoreToOrder")
+  users      User[]      @relation("StoreToUser")
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 }
@@ -502,18 +502,20 @@ model User {
   email     String   @unique
   password  String
   name      String
-  role      Role
-  storeId   String   @db.ObjectId
-  store     Store    @relation("StoreToUser", fields: [storeId], references: [id])
+  role      Role     @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  storeId String @db.ObjectId
+  store   Store  @relation("StoreToUser", fields: [storeId], references: [id])
 
   @@unique([email, storeId])
 }
 
 // Role enum represents the role of a user
 enum Role {
+  SUPER
   ADMIN
-  EDITOR
-  VIEWER
+  SUBADMIN
+  USER
 }
