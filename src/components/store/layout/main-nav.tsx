@@ -33,6 +33,7 @@ const MainNav = ({ data }: MainNavProps) => {
           {route.label}
         </Link>
       ))}
+      <p> تصنيفات المتجر </p>
     </nav>
   );
 };

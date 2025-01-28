@@ -7,12 +7,16 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 
+import Footer from "@/components/store/layout/footer";
+import Navbar from "@/components/store/layout/navbar";
+
+import StoreModalProvider from "@/providers/modal-store-provider";
 import ModalProvider from "@/providers/modal-provider";
 
 import "./globals.css";
 import { ToastProvider } from "@/providers/toast-provider";
 // import { ThemeProvider } from "@/providers/theme-provider";
-import ThemeProvider  from "@/providers/theme-provider";
+import ThemeProvider from "@/providers/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,15 +32,14 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="ar" dir="rtl">
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"
             // defaultTheme="dark"
             enableSystem
-            // disableTransitionOnChange
           >
-            <ModalProvider />
+            {/* <ModalProvider /> */}
             <NextSSRPlugin
               /**
                * The `extractRouterConfig` will extract **only** the route configs
@@ -46,7 +49,10 @@ export default function RootLayout({
                */
               routerConfig={extractRouterConfig(ourFileRouter)}
             />
+            <StoreModalProvider />
+            <Navbar />
             {children}
+            <Footer />
             <ToastProvider />
           </ThemeProvider>
         </body>
