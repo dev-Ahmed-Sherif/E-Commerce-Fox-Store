@@ -21,7 +21,7 @@ import ThemeProvider from "@/providers/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard",
+  title: "فوكس افضل مكان للانتيكات والطباعه بالليزر فى أسوان",
   description: "Admin Dashboard",
 };
 
