@@ -14,4 +14,4 @@ const Heading = ({ title, description }: HeadingProps) => {
   );
 };
 
-export default Heading;
+export { Heading };

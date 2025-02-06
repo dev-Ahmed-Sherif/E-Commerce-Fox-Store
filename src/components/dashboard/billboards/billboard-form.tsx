@@ -30,7 +30,7 @@ import { UploadButton } from "@/utils/uploadthing";
 
 import { AddBillboardSchema } from "@/schemas";
 import useToggleState from "@/hooks/use-toggle-state";
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 
 type BillboardFormProps = {
   initialData: Billboard | null;
