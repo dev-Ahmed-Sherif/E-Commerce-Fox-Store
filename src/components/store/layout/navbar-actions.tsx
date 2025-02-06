@@ -1,12 +1,18 @@
 "use client";
 
-import { ShoppingBag } from "lucide-react";
+import Link from "next/link";
+
+import {
+  ShoppingCart,
+  Heart,
+  PersonStanding,
+  CircleUserRound,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
 import useToggleState from "@/hooks/use-toggle-state";
 import { useEffect } from "react";
-
 import useCart from "@/hooks/use-cart";
 import { useRouter } from "next/navigation";
 
@@ -26,17 +32,44 @@ const NavbarActions = () => {
   const router = useRouter();
 
   return (
-    <div className="ml-auto flex items-center gap-x-4">
-      <ModeToggle />
-      <Button
-        onClick={() => router.push("/store/cart")}
-        className="flex items-center rounded-full bg-black px-4 py-2"
+    <div className="flex items-center gap-x-2">
+      <div className="cursor-pointer border-l-2 flex items-center gap-x-2 font-bold text-lg px-4 py-2">
+        <p> تسجيل الدخول </p>
+        <CircleUserRound size={28} color="#ee1717" />
+      </div>
+      <Link
+        href="/favorites"
+        className="relative border-l-2 flex items-center gap-x-2 font-bold text-lg px-4 py-2"
       >
-        <ShoppingBag size={20} color="white" />
-        <span className="ml-2 text-sm text-white font-medium">
-          {cart.items.length}
-        </span>
-      </Button>
+        <p> المفضلة </p>
+        <Heart
+          size={28}
+          className="text-white dark:text-black font-bold"
+          color="#ee1717"
+        />
+        {cart.items.length > 0 && (
+          <span className="absolute w-5 h-5 flex items-center justify-center bg-green-500 rounded-full left-3 -top-[5px] font-medium">
+            {cart.items.length}
+          </span>
+        )}
+      </Link>
+      <Link
+        href="/cart"
+        className="relative border-l-2 flex items-center gap-x-2 font-bold text-lg px-4 py-2"
+      >
+        <p> عربة التسوق </p>
+        <ShoppingCart
+          size={28}
+          className="text-white dark:text-black font-bold"
+          color="#ee1717"
+        />
+        {cart.items.length > 0 && (
+          <span className="absolute w-5 h-5 flex items-center justify-center bg-green-500 rounded-full left-3 -top-[5px] font-medium">
+            {cart.items.length}
+          </span>
+        )}
+      </Link>
+      <ModeToggle />
     </div>
   );
 };
