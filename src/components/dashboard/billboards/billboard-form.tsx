@@ -9,7 +9,6 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import Heading from "@/components/ui/heading";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -31,6 +30,7 @@ import { UploadButton } from "@/utils/uploadthing";
 
 import { AddBillboardSchema } from "@/schemas";
 import useToggleState from "@/hooks/use-toggle-state";
+import Heading from "@/components/ui/heading";
 
 type BillboardFormProps = {
   initialData: Billboard | null;
