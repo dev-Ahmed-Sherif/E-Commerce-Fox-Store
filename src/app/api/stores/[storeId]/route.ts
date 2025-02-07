@@ -32,7 +32,14 @@ export async function PATCH(
   }
 }
 
-export async function DELETE({ params }: { params: { storeId: string } }) {
+export async function DELETE(
+  req: Request,
+  {
+    params,
+  }: {
+    params: { storeId: string };
+  }
+) {
   try {
     const { userId } = await auth();
 
