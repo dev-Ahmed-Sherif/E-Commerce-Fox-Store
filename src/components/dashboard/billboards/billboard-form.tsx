@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Heading } from "@/components/ui/heading";
+// import { Heading } from "@/components/ui/heading";
 import ImageUpload from "@/components/ui/image-upload";
 
 import AlertModal from "@/components/dashboard/modals/alert-modal";

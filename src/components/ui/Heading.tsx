@@ -1,9 +1,9 @@
 "use client";
 
-type HeadingProps = {
+interface HeadingProps {
   title: string;
   description: string;
-};
+}
 
 const Heading = ({ title, description }: HeadingProps) => {
   return (
