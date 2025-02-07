@@ -31,32 +31,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="ar" dir="rtl">
-        <body className={inter.className}>
-          <ThemeProvider
-            attribute="class"
-            // defaultTheme="dark"
-            enableSystem
-          >
-            {/* <ModalProvider /> */}
-            <NextSSRPlugin
-              /**
-               * The `extractRouterConfig` will extract **only** the route configs
-               * from the router to prevent additional information from being
-               * leaked to the client. The data passed to the client is the same
-               * as if you were to fetch `/api/uploadthing` directly.
-               */
-              routerConfig={extractRouterConfig(ourFileRouter)}
-            />
-            <StoreModalProvider />
-            <Navbar />
-            {children}
-            <Footer />
-            <ToastProvider />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="ar" dir="rtl">
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          // defaultTheme="dark"
+          enableSystem
+        >
+          {/* <ModalProvider /> */}
+          <NextSSRPlugin
+            /**
+             * The `extractRouterConfig` will extract **only** the route configs
+             * from the router to prevent additional information from being
+             * leaked to the client. The data passed to the client is the same
+             * as if you were to fetch `/api/uploadthing` directly.
+             */
+            routerConfig={extractRouterConfig(ourFileRouter)}
+          />
+          <StoreModalProvider />
+          <Navbar />
+          {children}
+          <Footer />
+          <ToastProvider />
+        </ThemeProvider>
+      </body>
+    </html>
+    // <ClerkProvider>
+    // </ClerkProvider>
   );
 }
