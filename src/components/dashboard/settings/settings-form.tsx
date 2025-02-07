@@ -99,7 +99,7 @@ const SettingsForm = ({ initialData }: SettingsFormProps) => {
         onConfirm={onDelete}
       />
       <div className="flex items-center justify-between">
-        <Heading title="Settings" description="Manage store preferences" />
+        {/* <Heading title="Settings" description="Manage store preferences" /> */}
         <Button
           disabled={loading}
           variant="destructive"

@@ -40,7 +40,7 @@ const Client = ({ data }: ClientProps) => {
       </div>
       <Separator />
       <DataTable searchKey="name" columns={columns} data={data} />
-      <Heading title="API" description="API calls for Billboards" />
+      {/* <Heading title="API" description="API calls for Billboards" /> */}
       <Separator />
       <ApiList entityName="categories" entityIdName="categoryId" />
     </>
