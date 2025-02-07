@@ -1,7 +1,7 @@
 import prismadb from "@/lib/prismadb";
 import { CreditCard, DollarSign, Package } from "lucide-react";
 
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Overview from "@/components/dashboard/overview";
@@ -26,7 +26,7 @@ const DashboardPage = async ({ params }: DashboardPageProps) => {
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <Heading title="Dashboard" description="Overview of your store" />
+        {/* <Heading title="Dashboard" description="Overview of your store" /> */}
         <Separator />
         <div className="grid gap-4 grid-cols-3">
           <Card>

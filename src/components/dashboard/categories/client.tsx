@@ -25,10 +25,10 @@ const Client = ({ data }: ClientProps) => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <Heading
+        {/* <Heading
           title={`Categories (${data.length})`}
           description="Manage categories for your store"
-        />
+        /> */}
         <Button
           onClick={() => {
             router.push(`/${params.storeId}/categories/new`);
