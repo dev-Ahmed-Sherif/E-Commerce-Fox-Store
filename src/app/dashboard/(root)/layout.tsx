@@ -15,11 +15,11 @@ export default async function SetupLayout({ children }: SetupLayoutProps) {
   console.log(userId);
   const objectId = new ObjectId(userId as string);
   if (!userId) redirect("/sign-in");
-  const store = await prismadb.store.findFirst({
-    where: { userId: objectId },
-  });
+  // const store = await prismadb.store.findFirst({
+  //   where: { userId: objectId },
+  // });
 
-  if (store) redirect(`/${store.id}`);
+  // if (store) redirect(`/${store.id}`);
 
   return (
     <>
