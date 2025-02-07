@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Trash } from "lucide-react";
 
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -120,7 +120,7 @@ const SizeForm = ({ initialData }: SizeFormProps) => {
         onConfirm={onDelete}
       />
       <div className="flex items-center justify-between">
-        <Heading title={title} description={description} />
+        {/* <Heading title={title} description={description} /> */}
         {initialData && (
           <Button
             disabled={loading}

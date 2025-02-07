@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 
-import { ColorColumn } from "@/components/dashboard/sizes/columns";
+import { ColorColumn } from "@/components/dashboard/colors/columns";
 
 import {
   DropdownMenu,
@@ -21,7 +21,7 @@ import AlertModal from "@/components/dashboard/modals/alert-modal";
 import useToggleState from "@/hooks/use-toggle-state";
 
 type CellActionProps = {
-  data: SizeColumn;
+  data: ColorColumn;
 };
 
 const CellAction = ({ data }: CellActionProps) => {

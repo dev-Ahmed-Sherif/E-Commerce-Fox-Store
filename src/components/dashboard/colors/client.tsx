@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
@@ -22,10 +22,10 @@ const Client = ({ data }: ClientProps) => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <Heading
+        {/* <Heading
           title={`Colors (${data.length})`}
           description="Manage Colors for your store"
-        />
+        /> */}
         <Button
           onClick={() => {
             router.push(`/${params.storeId}/colors/new`);
@@ -37,7 +37,7 @@ const Client = ({ data }: ClientProps) => {
       </div>
       <Separator />
       <DataTable searchKey="name" columns={columns} data={data} />
-      <Heading title="API" description="API calls for Colors" />
+      {/* <Heading title="API" description="API calls for Colors" /> */}
       <Separator />
       <ApiList entityName="colors" entityIdName="colorId" />
     </>

@@ -21,8 +21,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import AlertModal from "@/components/dashboard/modals/alert-modal";
+import { Heading } from "@/components/ui/heading";
 import ImageUpload from "@/components/ui/image-upload";
+
+import AlertModal from "@/components/dashboard/modals/alert-modal";
 
 import { useToast } from "@/hooks/use-toast";
 
@@ -30,7 +32,6 @@ import { UploadButton } from "@/utils/uploadthing";
 
 import { AddBillboardSchema } from "@/schemas";
 import useToggleState from "@/hooks/use-toggle-state";
-import { Heading } from "@/components/ui/heading";
 
 type BillboardFormProps = {
   initialData: Billboard | null;

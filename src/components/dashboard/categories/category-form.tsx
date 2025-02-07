@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2, Trash } from "lucide-react";
 import { AddCategorySchema } from "@/schemas";
 
-import Heading from "@/components/ui/heading";
+import { Heading } from "@/components/ui/heading";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -129,7 +129,7 @@ const CategoryForm = ({ initialData, billboards }: CategoryFormProps) => {
         onConfirm={onDelete}
       />
       <div className="flex items-center justify-between">
-        <Heading title={title} description={description} />
+        {/* <Heading title={title} description={description} /> */}
         {initialData && (
           <Button
             disabled={loading}
