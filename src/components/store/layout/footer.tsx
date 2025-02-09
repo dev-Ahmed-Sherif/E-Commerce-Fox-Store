@@ -16,7 +16,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-slate-600 border-t py-7">
+    <footer className="bg-slate-600 border-t py-7 w-full fixed bottom-0 z-50">
       <Container>
         <div className="flex justify-evenly">
           <p className="text-center text-lg text-white">

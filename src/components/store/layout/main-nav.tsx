@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Category } from "@/types";
 
 type MainNavProps = {
-  data: Category[];
+  data: Category[] | any[];
 };
 
 const MainNav = ({ data }: MainNavProps) => {

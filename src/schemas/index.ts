@@ -64,3 +64,12 @@ export const productSchema = z.object({
   // invalid_type_error: "isFeatured must be a boolean",
   // }),
 });
+
+export const LoginSchema = z.object({
+  email: z.string().min(1, {
+    message: "Please Enter Your Name Or Number",
+  }),
+  password: z.string().min(1, {
+    message: "Please Enter Your Password",
+  }),
+});

@@ -4,11 +4,8 @@ import axios from "axios";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/hooks/use-toast";
+
 import { ToastAction } from "@/components/ui/toast";
-
-import { useStoreModal } from "@/hooks/use-store-modal";
-
 import Modal from "@/components/ui/model";
 import {
   Form,
@@ -21,7 +18,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import { useStoreModal } from "@/hooks/use-store-modal";
 import useToggleState from "@/hooks/use-toggle-state";
+import { useToast } from "@/hooks/use-toast";
 
 import { AddStoreSchema } from "@/schemas";
 
@@ -66,43 +65,41 @@ const StoreModal = () => {
       isOpen={storeModal.isOpen}
       onClose={storeModal.onClose}
     >
-      <div>
-        <div className="space-y-4 py-2 pb-4">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={loading}
-                        {...field}
-                        type="text"
-                        placeholder="E-Commerce"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="pt-6 space-x-2 flex items-center justify-end">
-                <Button
-                  disabled={loading}
-                  variant="outline"
-                  onClick={storeModal.onClose}
-                >
-                  Cancel
-                </Button>
-                <Button disabled={loading} type="submit">
-                  Continue
-                </Button>
-              </div>
-            </form>
-          </Form>
-        </div>
+      <div className="space-y-4 py-2 pb-4">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      {...field}
+                      type="text"
+                      placeholder="E-Commerce"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="pt-6 space-x-2 flex items-center justify-end">
+              <Button
+                disabled={loading}
+                variant="outline"
+                onClick={storeModal.onClose}
+              >
+                Cancel
+              </Button>
+              <Button disabled={loading} type="submit">
+                Continue
+              </Button>
+            </div>
+          </form>
+        </Form>
       </div>
     </Modal>
   );

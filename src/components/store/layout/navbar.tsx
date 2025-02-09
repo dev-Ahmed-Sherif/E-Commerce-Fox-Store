@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import getCategories from "@/actions/get-categories";
+// import getCategories from "@/actions/get-categories";
 
 import Container from "@/components/ui/container";
 import MainNav from "@/components/store/layout/main-nav";
@@ -12,7 +12,8 @@ import SearchInput from "@/components/store/searchInput";
 export const revalidate = 0;
 
 const Navbar = async () => {
-  const categories = await getCategories();
+  // const categories = await getCategories();
+  const categories = [""];
 
   return (
     <header className="top-0 z-50 sticky border-b py-4">
