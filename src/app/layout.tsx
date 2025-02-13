@@ -29,8 +29,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const categories = await getCategories();
-
+  // Fetch categories on page load
+  // const categories = await getCategories();
   return (
     <html lang="ar" dir="rtl">
       <body className={inter.className}>
@@ -50,7 +50,7 @@ export default async function RootLayout({
             routerConfig={extractRouterConfig(ourFileRouter)}
           /> */}
           <StoreModalProvider />
-          <Navbar categories={categories} />
+          <Navbar categories={[]} />
           {children}
           <Footer />
           <ToastProvider />

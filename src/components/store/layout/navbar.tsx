@@ -11,7 +11,7 @@ import NavbarActions from "@/components/store/layout/navbar-actions";
 import SearchInput from "@/components/store/searchInput";
 
 type NavbarProps = {
-  categories: Category[];
+  categories: Category[]|any;
 };
 
 const Navbar = ({ categories }: NavbarProps) => {
@@ -26,7 +26,7 @@ const Navbar = ({ categories }: NavbarProps) => {
           <NavbarActions />
         </div>
       </Container>
-      <MainNav data={categories} />
+      {/* <MainNav data={categories} /> */}
     </header>
   );
 };
