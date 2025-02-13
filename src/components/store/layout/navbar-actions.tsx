@@ -16,7 +16,10 @@ const NavbarActions = () => {
 
   return (
     <div className="flex items-center gap-x-2">
-      <div className="cursor-pointer border-l-2 flex items-center gap-x-2 font-bold text-lg px-4 py-2">
+      <div
+        onClick={() => {}}
+        className="cursor-pointer border-l-2 flex items-center gap-x-2 font-bold text-lg px-4 py-2"
+      >
         <p> تسجيل الدخول </p>
         <CircleUserRound size={28} color="#ee1717" />
       </div>
