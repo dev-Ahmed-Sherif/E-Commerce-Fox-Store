@@ -8,6 +8,8 @@ import ProductList from "@/components/store/product-list";
 import Container from "@/components/ui/container";
 import { Separator } from "@/components/ui/separator";
 
+export const revalidate = 0;
+
 type ProductPageProps = {
   params: {
     productId: string;
