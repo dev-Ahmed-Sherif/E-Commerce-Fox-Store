@@ -7,7 +7,7 @@
 
 // export const revalidate = 0;
 
-const HomePage = () => {
+const Home = () => {
   // const billboard = await getBillboards("6790844d0ac492780ece0353");
   // const products = await getProducts({ isFeatured: true });
 
@@ -26,4 +26,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
