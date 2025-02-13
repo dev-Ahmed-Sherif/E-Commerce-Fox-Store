@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import { ClerkProvider } from "@clerk/nextjs";
-
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 // import { ourFileRouter } from "@/app/api/uploadthing/core";
 
-// import Footer from "@/components/store/layout/footer";
-// import Navbar from "@/components/store/layout/navbar";
+import Footer from "@/components/store/layout/footer";
+import Navbar from "@/components/store/layout/navbar";
 
 import StoreModalProvider from "@/providers/modal-store-provider";
-import ModalProvider from "@/providers/modal-provider";
+
+import { ToastProvider } from "@/providers/toast-provider";
+import ThemeProvider from "@/providers/theme-provider";
+
+import getCategories from "@/actions/get-categories";
 
 import "./globals.css";
-import { ToastProvider } from "@/providers/toast-provider";
-// import { ThemeProvider } from "@/providers/theme-provider";
-import ThemeProvider from "@/providers/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,11 +24,13 @@ export const metadata: Metadata = {
   description: "Admin Dashboard",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const categories = await getCategories();
+
   return (
     <html lang="ar" dir="rtl">
       <body className={inter.className}>
@@ -49,14 +50,12 @@ export default function RootLayout({
             routerConfig={extractRouterConfig(ourFileRouter)}
           /> */}
           <StoreModalProvider />
-          {/*<Navbar />*/}
+          <Navbar categories={categories} />
           {children}
-          {/* <Footer /> */}
+          <Footer />
           <ToastProvider />
         </ThemeProvider>
       </body>
     </html>
-    // <ClerkProvider>
-    // </ClerkProvider>
   );
 }
