@@ -23,7 +23,7 @@ const Navbar = ({ categories }: NavbarProps) => {
           <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
             <Image src="/logo.jpg" alt="logo" width={150} height={150} />
           </Link>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<></>}>
             <SearchInput />
           </Suspense>
           <NavbarActions />
