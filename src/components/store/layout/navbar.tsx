@@ -9,9 +9,10 @@ import Container from "@/components/ui/container";
 import MainNav from "@/components/store/layout/main-nav";
 import NavbarActions from "@/components/store/layout/navbar-actions";
 import SearchInput from "@/components/store/searchInput";
+import { Suspense } from "react";
 
 type NavbarProps = {
-  categories: Category[]|any;
+  categories: Category[] | any;
 };
 
 const Navbar = ({ categories }: NavbarProps) => {
@@ -22,7 +23,9 @@ const Navbar = ({ categories }: NavbarProps) => {
           <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
             <Image src="/logo.jpg" alt="logo" width={150} height={150} />
           </Link>
-          <SearchInput />
+          <Suspense fallback={<div>Loading...</div>}>
+            <SearchInput />
+          </Suspense>
           <NavbarActions />
         </div>
       </Container>
