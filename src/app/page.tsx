@@ -1,9 +1,9 @@
 // import getBillboards from "@/actions/get-billboard";
 // import getProducts from "@/actions/get-products";
 
-import Container from "@/components/ui/container";
-import Billboard from "@/components/store/billboard";
-import ProductList from "@/components/store/product-list";
+// import Container from "@/components/ui/container";
+// import Billboard from "@/components/store/billboard";
+// import ProductList from "@/components/store/product-list";
 
 // export const revalidate = 0;
 

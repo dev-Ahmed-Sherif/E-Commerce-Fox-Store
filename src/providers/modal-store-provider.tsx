@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 import useToggleState from "@/hooks/use-toggle-state";
-import PreviewModal from "@/components/store/previewModal";
+// import PreviewModal from "@/components/store/previewModal";
 
 const StoreModalProvider = () => {
   // const [isMounted, toggleIsMounted] = useToggleState(true);
@@ -16,11 +16,7 @@ const StoreModalProvider = () => {
   //   return null;
   // }
 
-  return (
-    <>
-      <PreviewModal />
-    </>
-  );
+  return <>{/* <PreviewModal /> */}</>;
 };
 
 export default StoreModalProvider;

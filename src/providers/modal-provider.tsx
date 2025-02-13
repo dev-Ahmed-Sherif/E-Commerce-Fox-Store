@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import StoreModal from "@/components/dashboard/modals/store-modal";
+// import StoreModal from "@/components/dashboard/modals/store-modal";
 
 import useToggleState from "@/hooks/use-toggle-state";
 
@@ -17,11 +17,7 @@ const ModalProvider = () => {
     return null;
   }
 
-  return (
-    <>
-      <StoreModal />
-    </>
-  );
+  return <>{/* <StoreModal /> */}</>;
 };
 
 export default ModalProvider;

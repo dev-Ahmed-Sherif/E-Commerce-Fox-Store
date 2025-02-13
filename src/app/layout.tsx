@@ -7,8 +7,8 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 // import { ourFileRouter } from "@/app/api/uploadthing/core";
 
-import Footer from "@/components/store/layout/footer";
-import Navbar from "@/components/store/layout/navbar";
+// import Footer from "@/components/store/layout/footer";
+// import Navbar from "@/components/store/layout/navbar";
 
 import StoreModalProvider from "@/providers/modal-store-provider";
 import ModalProvider from "@/providers/modal-provider";
@@ -49,9 +49,9 @@ export default function RootLayout({
             routerConfig={extractRouterConfig(ourFileRouter)}
           /> */}
           <StoreModalProvider />
-          <Navbar />
+          {/*<Navbar />*/}
           {children}
-          <Footer />
+          {/* <Footer /> */}
           <ToastProvider />
         </ThemeProvider>
       </body>
