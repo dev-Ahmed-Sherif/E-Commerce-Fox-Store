@@ -6,15 +6,15 @@ import useToggleState from "@/hooks/use-toggle-state";
 import PreviewModal from "@/components/store/previewModal";
 
 const StoreModalProvider = () => {
-  const [isMounted, toggleIsMounted] = useToggleState(true);
+  // const [isMounted, toggleIsMounted] = useToggleState(true);
 
-  useEffect(() => {
-    toggleIsMounted();
-  }, []);
+  // useEffect(() => {
+  //   toggleIsMounted();
+  // }, []);
 
-  if (!isMounted) {
-    return null;
-  }
+  // if (!isMounted) {
+  //   return null;
+  // }
 
   return (
     <>
