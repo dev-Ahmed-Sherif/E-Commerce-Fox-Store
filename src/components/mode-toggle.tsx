@@ -1,28 +1,39 @@
 "use client";
 
 import type { FC } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "@/i18n/locale-provider";
 
 const ModeToggle: FC = () => {
   const { resolvedTheme, setTheme } = useTheme();
-  const toggleCurrentTheme = () => {
-    // console.log(resolvedTheme);
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  };
+  const t = useTranslations();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return (
+      <Button variant="ghost" size="icon" aria-hidden className="opacity-0">
+        <Sun className="h-5 w-5" />
+      </Button>
+    );
+  }
 
   return (
     <Button
       variant="ghost"
       size="icon"
-      className="ghost"
-      onClick={() => toggleCurrentTheme()}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      aria-label={t.theme.toggle}
     >
-      <Sun className="h-6 w-6 rotate-0 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <Moon className="absolute h-6 w-6 rotate-0 scale-100 transition-all dark:hidden" />
-      {/* used for screen readers Accessibility */}
-      <span className="sr-only">Toggle theme</span>
+      {resolvedTheme === "dark" ? (
+        <Sun className="h-5 w-5" />
+      ) : (
+        <Moon className="h-5 w-5" />
+      )}
     </Button>
   );
 };

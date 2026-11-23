@@ -1,10 +1,10 @@
 import prismadb from "@/lib/prismadb";
-import { auth } from "@clerk/nextjs/server";
+import { getAdminUserId } from "@/lib/auth/require-admin";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { userId } = await auth();
+    const userId = await getAdminUserId();
     const body = await req.json();
 
     const { name } = body;

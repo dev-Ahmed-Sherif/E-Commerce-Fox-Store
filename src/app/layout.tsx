@@ -1,59 +1,60 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { cookies } from "next/headers";
+import { Cairo, Outfit } from "next/font/google";
 
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-import { extractRouterConfig } from "uploadthing/server";
-// import { ourFileRouter } from "@/app/api/uploadthing/core";
-
-import Footer from "@/components/store/layout/footer";
-import Navbar from "@/components/store/layout/navbar";
-
-import StoreModalProvider from "@/providers/modal-store-provider";
-
-import { ToastProvider } from "@/providers/toast-provider";
+import { defaultLocale, isLocale, localeDirection, LOCALE_COOKIE } from "@/i18n/config";
+import { LocaleProvider } from "@/i18n/locale-provider";
 import ThemeProvider from "@/providers/theme-provider";
-
-import getCategories from "@/actions/get-categories";
+import { ToastProvider } from "@/providers/toast-provider";
 
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  variable: "--font-cairo",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "فوكس افضل مكان للانتيكات والطباعه بالليزر فى أسوان",
-  description: "Admin Dashboard",
+  title: {
+    default: "Fox Store | فوكس ستور",
+    template: "%s | Fox Store",
+  },
+  description:
+    "فوكس لأعمال الليزر والديكورات والأنتيكات — Fox Works EG laser craft, décor & antiques.",
+  icons: {
+    icon: "/fox-store-logo.jpg",
+  },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Fetch categories on page load
-  // const categories = await getCategories();
+  const jar = await cookies();
+  const localeCookie = jar.get(LOCALE_COOKIE)?.value;
+  const locale = isLocale(localeCookie) ? localeCookie : defaultLocale;
+
   return (
-    <html lang="ar" dir="rtl">
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          // defaultTheme="dark"
-          enableSystem
-        >
-          {/* <ModalProvider /> */}
-          {/* <NextSSRPlugin
-            /**
-             * The `extractRouterConfig` will extract **only** the route configs
-             * from the router to prevent additional information from being
-             * leaked to the client. The data passed to the client is the same
-             * as if you were to fetch `/api/uploadthing` directly.
-            
-            routerConfig={extractRouterConfig(ourFileRouter)}
-          /> */}
-          <StoreModalProvider />
-          <Navbar categories={[]} />
-          {children}
-          <Footer />
-          <ToastProvider />
+    <html
+      lang={locale}
+      dir={localeDirection[locale]}
+      suppressHydrationWarning
+      className={`${outfit.variable} ${cairo.variable}`}
+    >
+      <body className="min-h-screen font-sans">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <LocaleProvider initialLocale={locale}>
+            {children}
+            <ToastProvider />
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

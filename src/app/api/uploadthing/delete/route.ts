@@ -1,11 +1,11 @@
-import { auth } from "@clerk/nextjs/server";
+import { getAdminUserId } from "@/lib/auth/require-admin";
 import { NextResponse } from "next/server";
 import { UTApi } from "uploadthing/server";
 
 const utapi = new UTApi();
 
 export async function POST(req: Request) {
-  const { userId } = await auth();
+  const userId = await getAdminUserId();
 
   if (!userId) return new NextResponse("Unauthorized", { status: 401 });
 

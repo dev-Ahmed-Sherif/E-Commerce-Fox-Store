@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // images: {
-  //   domains: ["res.cloudinary.com"],
-  // },
   images: {
     remotePatterns: [
       {
@@ -11,11 +8,14 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
-  // eslint: {
-  //   ignoreDuringBuilds: true,
-  // },
 };
 
 export default nextConfig;

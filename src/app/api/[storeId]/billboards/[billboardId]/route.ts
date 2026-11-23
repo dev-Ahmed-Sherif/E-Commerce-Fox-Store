@@ -1,5 +1,5 @@
 import prismadb from "@/lib/prismadb";
-import { auth } from "@clerk/nextjs/server";
+import { getAdminUserId } from "@/lib/auth/require-admin";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -31,7 +31,7 @@ export async function PATCH(
   { params }: { params: { storeId: string; billboardId: string } }
 ) {
   try {
-    const { userId } = await auth();
+    const userId = await getAdminUserId();
 
     if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
 
@@ -79,7 +79,7 @@ export async function DELETE(
   }
 ) {
   try {
-    const { userId } = await auth();
+    const userId = await getAdminUserId();
 
     if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
 

@@ -1,61 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-
-import { ShoppingCart, Heart, CircleUserRound } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 
 import useCart from "@/hooks/use-cart";
-
 import ModeToggle from "@/components/mode-toggle";
+import LanguageToggle from "@/components/shared/language-toggle";
+import UserMenu from "@/components/store/layout/user-menu";
+import { useTranslations } from "@/i18n/locale-provider";
 
 const NavbarActions = () => {
-  const router = useRouter();
-
   const cart = useCart();
+  const t = useTranslations();
 
   return (
-    <div className="flex items-center gap-x-2">
-      <div
-        onClick={() => {}}
-        className="cursor-pointer border-l-2 flex items-center gap-x-2 font-bold text-lg px-4 py-2"
-      >
-        <p> تسجيل الدخول </p>
-        <CircleUserRound size={28} color="#ee1717" />
-      </div>
-      <Link
-        href="/favorites"
-        className="relative border-l-2 flex items-center gap-x-2 font-bold text-lg px-4 py-2"
-      >
-        <p> المفضلة </p>
-        <Heart
-          size={28}
-          className="text-white dark:text-black font-bold"
-          color="#ee1717"
-        />
-        {cart.items.length > 0 && (
-          <span className="absolute w-5 h-5 flex items-center justify-center bg-green-500 rounded-full left-3 -top-[5px] font-medium">
-            {cart.items.length}
-          </span>
-        )}
-      </Link>
+    <div className="flex items-center gap-1 sm:gap-2">
+      <LanguageToggle />
+      <ModeToggle />
+      <UserMenu />
       <Link
         href="/cart"
-        className="relative border-l-2 flex items-center gap-x-2 font-bold text-lg px-4 py-2"
+        className="relative inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition hover:bg-muted"
+        aria-label={t.nav.cart}
       >
-        <p> عربة التسوق </p>
-        <ShoppingCart
-          size={28}
-          className="text-white dark:text-black font-bold"
-          color="#ee1717"
-        />
+        <ShoppingCart className="h-5 w-5 text-fox-crimson" />
+        <span className="hidden sm:inline">{t.nav.cart}</span>
         {cart.items.length > 0 && (
-          <span className="absolute w-5 h-5 flex items-center justify-center bg-green-500 rounded-full left-3 -top-[5px] font-medium">
+          <span className="absolute -top-1 end-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-fox-crimson px-1 text-[10px] font-bold text-white">
             {cart.items.length}
           </span>
         )}
       </Link>
-      <ModeToggle />
     </div>
   );
 };
