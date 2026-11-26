@@ -2,13 +2,14 @@
 
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Pencil, Plus, Trash2, Eye, EyeOff } from "lucide-react";
+import { Pencil, Plus, Trash2, Eye, EyeOff, Image as ImageIcon } from "lucide-react";
 
 import PageTransition from "@/components/shared/page-transition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import ImageUpload from "@/components/ui/image-upload";
 import type { DemoCategory } from "@/lib/demo-data";
 import { useTranslations } from "@/i18n/locale-provider";
 
@@ -19,6 +20,7 @@ const emptyForm = {
   showOnHome: true,
   billboardLabel: "",
   imageUrl: "",
+  imageKeys: [] as string[],
 };
 
 export default function DashboardCategoriesPage() {
@@ -34,6 +36,23 @@ export default function DashboardCategoriesPage() {
     const data = await res.json();
     setItems(data.categories || []);
   }, []);
+
+  const uploadImages = async (files: File[]) => {
+    const formData = new FormData();
+    files.forEach((f) => formData.append("files", f));
+    const res = await fetch("/api/uploadthing", {
+      method: "POST",
+      body: formData,
+    });
+    if (!res.ok) return [];
+    const result = await res.json();
+    return (result.keys || []) as string[];
+  };
+
+  const handleImageUpload = async (files: File[]) => {
+    const keys = await uploadImages(files);
+    setForm((f) => ({ ...f, imageKeys: [...f.imageKeys, ...keys] }));
+  };
 
   useEffect(() => {
     load();
@@ -52,12 +71,14 @@ export default function DashboardCategoriesPage() {
       showOnHome: item.showOnHome,
       billboardLabel: item.billboardLabel,
       imageUrl: item.imageUrl,
+      imageKeys: (item as any).imageKeys || [],
     });
     setOpen(true);
   };
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    const uploadedKeys = form.imageKeys;
     await fetch("/api/dashboard/catalog", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -71,6 +92,7 @@ export default function DashboardCategoriesPage() {
           showOnHome: form.showOnHome,
           billboardLabel: form.billboardLabel || form.name,
           imageUrl: form.imageUrl || undefined,
+          imageKeys: form.imageKeys.length > 0 ? form.imageKeys : undefined,
         },
       }),
     });
@@ -242,7 +264,27 @@ export default function DashboardCategoriesPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label>Billboard / Image URL</Label>
+                <Label>Category Images</Label>
+                <ImageUpload
+                  value={form.imageUrl ? [{ url: form.imageUrl }] : []}
+                  onRemove={(url) =>
+                    setForm((f) => {
+                      const keys = f.imageKeys.filter((k) => k !== url);
+                      return {
+                        ...f,
+                        imageUrl: keys.length > 0 ? keys[0] : "",
+                        imageKeys: keys,
+                      };
+                    })
+                  }
+                  onUpload={handleImageUpload}
+                />
+                <p className="text-xs text-muted-foreground">
+                  Upload up to 4 images (main image appears as the category thumbnail).
+                </p>
+              </div>
+              <div className="space-y-2">
+                <Label>Billboard / Fallback Image URL</Label>
                 <Input
                   value={form.imageUrl}
                   onChange={(e) =>

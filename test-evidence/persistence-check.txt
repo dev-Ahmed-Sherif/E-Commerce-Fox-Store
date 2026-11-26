@@ -1,0 +1,25 @@
+ADM-14 — Catalog persistence across server restart
+
+Steps:
+1. Started the dev server with local MongoDB.
+2. Signed in as the demo admin.
+3. Created category "QA Persistence Marker" through /api/dashboard/catalog.
+4. GET /api/dashboard/catalog reported 7 categories and the marker present.
+5. Stopped the dev server and started it again.
+6. Signed in again and called GET /api/dashboard/catalog.
+
+Result before restart:
+- categories: 7
+- marker present: true
+
+Result after restart:
+- categories: 6
+- products: 12
+- marker present: false
+
+Conclusion:
+The admin catalog is stored in the in-memory demo store, so dashboard changes are
+lost on restart. This confirms the known limitation documented as BLK-04 in
+TEST_PLAN.md. It is not a regression in this test run; it is a production
+persistence gap that must be addressed before relying on the dashboard for real
+catalog management.

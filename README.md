@@ -176,6 +176,19 @@ The dashboard works without MongoDB using a hard-coded demo admin:
 The login form is pre-filled with these values. Change or remove this account
 before deploying to production.
 
+`npm run db:seed` also creates database-backed admin users when the schema has
+been pushed:
+
+| Email | Role |
+|-------|------|
+| `super@fox-store.com` | `SUPER` |
+| `admin@fox-store.com` | `ADMIN` |
+
+The seed password defaults to `FoxStore@2026!`. Override it with
+`SEED_DEFAULT_PASSWORD`, or use `SEED_SUPER_PASSWORD` / `SEED_ADMIN_PASSWORD`
+for different passwords per account. Re-running the seed updates the role link
+without resetting an existing password.
+
 ### Useful URLs
 
 | URL | Purpose |
@@ -241,7 +254,9 @@ MongoDB notes:
 | `npm run db:seed` | Insert/refresh the built-in Role records |
 | `npm run db:migrate-roles` | Backfill `User.roleId` from the legacy `role` string |
 
-There is currently **no test runner** configured in `package.json`.
+There is currently **no test runner** configured in `package.json`. A manual
+business test plan covering the storefront, accounts, admin catalog and
+checkout is in [TEST_PLAN.md](./TEST_PLAN.md).
 
 ---
 

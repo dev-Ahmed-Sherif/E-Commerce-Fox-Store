@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   const body = await req.json();
   const { entity, action, data, id } = body as {
     entity: "category" | "product";
-    action: "upsert" | "delete";
+    action: "upsert" | "delete" | "syncImages";
     data?: Record<string, unknown>;
     id?: string;
   };
@@ -59,6 +59,23 @@ export async function POST(req: Request) {
         data as Parameters<typeof demoStore.upsertProduct>[0]
       );
       return NextResponse.json({ item });
+    }
+    // Sync a product's main image to a category
+    if (action === "syncImages" && data) {
+      const { categoryId, imageUrl } = data as {
+        categoryId: string;
+        imageUrl: string;
+      };
+      if (categoryId && imageUrl) {
+        const category = demoStore.getCategory(categoryId);
+        if (category) {
+          demoStore.setCategoryImage(categoryId, imageUrl);
+          return NextResponse.json({
+            item: demoStore.getCategory(categoryId),
+          });
+        }
+      }
+      return NextResponse.json({ error: "Missing categoryId or imageUrl" }, { status: 400 });
     }
   }
 

@@ -65,13 +65,15 @@ export async function POST(req: Request) {
       });
 
       return NextResponse.json({ user: tokens.user, message: "Logged in" });
-    } catch {
+    } catch (error) {
+      console.error("[AUTH_LOGIN_USER]", error);
       return NextResponse.json(
         { error: "Invalid email or password" },
         { status: 401 }
       );
     }
-  } catch {
+  } catch (error) {
+    console.error("[AUTH_LOGIN]", error);
     return NextResponse.json({ error: "Login failed" }, { status: 500 });
   }
 }

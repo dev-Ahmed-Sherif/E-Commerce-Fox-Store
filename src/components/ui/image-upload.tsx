@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Loader2, Trash } from "lucide-react";
+import { Loader2, Trash, Image as ImageIcon } from "lucide-react";
 
 // import { UploadButton } from "@/utils/uploadthing";
 
@@ -14,11 +14,13 @@ import useToggleState from "@/hooks/use-toggle-state";
 type ImageUploadProps = {
   value: any[] | undefined;
   onRemove: (value: string) => void;
+  onUpload: (files: File[]) => void;
 };
 
 const ImageUpload = ({
   value,
   onRemove,
+  onUpload,
 }: ImageUploadProps) => {
   const [imageIsDeleting, toggleImageIsDeleting] = useToggleState(false);
 
@@ -28,6 +30,14 @@ const ImageUpload = ({
     toggleImageIsDeleting();
     onRemove(value);
     setSelected(value);
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      onUpload(Array.from(files));
+    }
+    e.target.value = "";
   };
 
   // console.log(value);
@@ -60,6 +70,20 @@ const ImageUpload = ({
           </Button>
         </div>
       ))}
+      <input
+        type="file"
+        multiple
+        accept="image/*"
+        className="hidden"
+        id="image-upload"
+        onChange={handleFileChange}
+      />
+      <label htmlFor="image-upload" className="cursor-pointer">
+        <Button variant="outline" size="sm">
+          <ImageIcon className="h-4 w-4 me-2" />
+          Upload
+        </Button>
+      </label>
     </div>
   );
 };

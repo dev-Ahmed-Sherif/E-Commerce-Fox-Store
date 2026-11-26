@@ -8,6 +8,7 @@ export type DemoCategory = {
   billboardLabel: string;
   billboardLabelAr: string;
   imageUrl: string;
+  images: { id: string; url: string; order: number }[];
   createdAt: string;
 };
 
@@ -37,6 +38,11 @@ let categories: DemoCategory[] = [
     billboardLabel: "Fans, trays, and engagement stands",
     billboardLabelAr: "مسكات، صواني، وستاندات خطوبة",
     imageUrl: "/catalog/engagement-stand.jpg",
+    images: [
+      { id: "img-wd-1", url: "/catalog/wedding-fans.jpg", order: 0 },
+      { id: "img-wd-2", url: "/catalog/engagement-tray.jpg", order: 1 },
+      { id: "img-wd-3", url: "/catalog/wedding-toppers.jpg", order: 2 },
+    ],
     createdAt: catalogCreatedAt,
   },
   {
@@ -47,6 +53,10 @@ let categories: DemoCategory[] = [
     billboardLabel: "Acrylic keepsakes for the contract day",
     billboardLabelAr: "لوحات أكريليك ليوم كتب الكتاب",
     imageUrl: "/catalog/katb-kitab.jpg",
+    images: [
+      { id: "img-kb-1", url: "/catalog/katb-1.jpg", order: 0 },
+      { id: "img-kb-2", url: "/catalog/katb-2.jpg", order: 1 },
+    ],
     createdAt: catalogCreatedAt,
   },
   {
@@ -57,6 +67,10 @@ let categories: DemoCategory[] = [
     billboardLabel: "Shields, holders, brooches, and prints",
     billboardLabelAr: "دروع، مسكات، بروش، وبصمات",
     imageUrl: "/catalog/graduation.jpg",
+    images: [
+      { id: "img-gd-1", url: "/catalog/graduation-1.jpg", order: 0 },
+      { id: "img-gd-2", url: "/catalog/graduation-2.jpg", order: 1 },
+    ],
     createdAt: catalogCreatedAt,
   },
   {
@@ -67,6 +81,10 @@ let categories: DemoCategory[] = [
     billboardLabel: "Names, frames, letters, and verses",
     billboardLabelAr: "أسماء، براويز، حروف، وآيات",
     imageUrl: "/catalog/nursery-names.jpg",
+    images: [
+      { id: "img-dc-1", url: "/catalog/nursery-names-1.jpg", order: 0 },
+      { id: "img-dc-2", url: "/catalog/nursery-names-2.jpg", order: 1 },
+    ],
     createdAt: catalogCreatedAt,
   },
   {
@@ -77,6 +95,10 @@ let categories: DemoCategory[] = [
     billboardLabel: "School and occasion models",
     billboardLabelAr: "مجسمات للمدارس والمناسبات",
     imageUrl: "/catalog/october-models.jpg",
+    images: [
+      { id: "img-mm-1", url: "/catalog/october-models-1.jpg", order: 0 },
+      { id: "img-mm-2", url: "/catalog/october-models-2.jpg", order: 1 },
+    ],
     createdAt: catalogCreatedAt,
   },
   {
@@ -87,6 +109,10 @@ let categories: DemoCategory[] = [
     billboardLabel: "Acrylic key holders and custom gifts",
     billboardLabelAr: "علاقات مفاتيح وهدايا حسب الطلب",
     imageUrl: "/catalog/key-holder.jpg",
+    images: [
+      { id: "img-gf-1", url: "/catalog/key-holder-1.jpg", order: 0 },
+      { id: "img-gf-2", url: "/catalog/key-holder-2.jpg", order: 1 },
+    ],
     createdAt: catalogCreatedAt,
   },
 ];
@@ -305,6 +331,7 @@ export const demoStore = {
       billboardLabel: input.billboardLabel || input.name,
       billboardLabelAr: input.billboardLabelAr || input.nameAr || input.name,
       imageUrl: input.imageUrl || "/catalog/letter-decor.jpg",
+      images: [],
       createdAt: new Date().toISOString(),
     };
     categories = [created, ...categories];
@@ -346,6 +373,16 @@ export const demoStore = {
   },
   deleteProduct: (id: string) => {
     products = products.filter((p) => p.id !== id);
+  },
+  setCategoryImage: (categoryId: string, imageUrl: string) => {
+    const category = categories.find((c) => c.id === categoryId);
+    if (category) {
+      category.imageUrl = imageUrl;
+      category.images = category.images || [];
+      if (!category.images.find((img) => img.id === categoryId)) {
+        category.images.push({ id: categoryId, url: imageUrl, order: 0 });
+      }
+    }
   },
   stats: () => ({
     products: products.filter((p) => !p.isArchived).length,

@@ -58,6 +58,27 @@ export default function CategoryView({
         </div>
       </div>
 
+      {category.images && category.images.length > 0 && (
+        <div className="mb-10 overflow-hidden rounded-2xl border border-border bg-muted/30">
+          <div className="flex gap-2 overflow-x-auto px-6 pt-6 pb-2">
+            {category.images.map((img) => (
+              <div
+                key={img.id}
+                className="w-24 h-24 shrink-0 rounded-lg overflow-hidden border border-border"
+              >
+                <Image
+                  src={img.url}
+                  alt={locale === "ar" ? category.nameAr : category.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width:768px) 80px, 96px"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {products.length === 0 ? (
         <p className="text-muted-foreground">{t.store.noProducts}</p>
       ) : (

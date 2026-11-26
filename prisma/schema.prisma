@@ -65,6 +65,8 @@ model Billboard {
 model Category {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
+  imageUrl    String?
+  images      Image[]   @relation("CategoryToImage")
   products    Product[] @relation("CategoryToProduct")
   storeId     String    @db.ObjectId
   store       Store     @relation("StoreToCategory", fields: [storeId], references: [id], onDelete: Cascade)
@@ -75,6 +77,21 @@ model Category {
 
   @@index([storeId])
   @@index([billboardId])
+}
+
+model Image {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  order     Int?     @default(0)
+  productId String?   @db.ObjectId
+  product   Product?  @relation("ProductToImage", fields: [productId], references: [id], onDelete: Cascade)
+  categoryId String?  @db.ObjectId
+  category  Category?  @relation("CategoryToImage", fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+  @@index([categoryId])
 }
 
 model Size {
@@ -128,17 +145,6 @@ model Product {
   @@index([categoryId])
   @@index([sizeId])
   @@index([colorId])
-}
-
-model Image {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  url       String
-  productId String   @db.ObjectId
-  product   Product  @relation("ProductToImage", fields: [productId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([productId])
 }
 
 model Order {

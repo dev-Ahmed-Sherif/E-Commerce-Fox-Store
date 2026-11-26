@@ -105,6 +105,29 @@ export default function StoreHome({ categories, products }: StoreHomeProps) {
                       ? category.billboardLabelAr
                       : category.billboardLabel}
                   </p>
+                  {category.images && category.images.length > 0 && (
+                    <div className="flex gap-1.5 mt-2 overflow-x-auto">
+                      {category.images.slice(0, 3).map((img) => (
+                        <div
+                          key={img.id}
+                          className="w-10 h-10 shrink-0 rounded-md overflow-hidden border border-white/30"
+                        >
+                          <Image
+                            src={img.url}
+                            alt={locale === "ar" ? category.nameAr : category.name}
+                            fill
+                            className="object-cover"
+                            sizes="40px"
+                          />
+                        </div>
+                      ))}
+                      {category.images.length > 3 && (
+                        <div className="w-10 h-10 shrink-0 rounded-md border-2 border-dashed border-white/30 flex items-center justify-center">
+                          <span className="text-xs text-white/60">+{category.images.length - 3}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </Link>
             </FadeItem>
